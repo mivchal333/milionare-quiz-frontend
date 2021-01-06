@@ -8,6 +8,11 @@ export const loginRequest = (username, password) => api.post('/login', {
     username,
     password
 })
+export const registerRequest = (username, password, nick) => api.post('/register', {
+    username,
+    password,
+    nick
+})
 
 
 export const fetchQuestions = () => api.get('/question')

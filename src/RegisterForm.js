@@ -1,5 +1,4 @@
-import React, {useEffect} from 'react'
-import PropTypes from 'prop-types'
+import React, {useRef, useState} from 'react'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -9,6 +8,9 @@ import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {Card} from "@material-ui/core";
+import {connect} from "react-redux";
+import {Alert} from "@material-ui/lab";
+import {register} from './actions/actions'
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -37,40 +39,19 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const RegisterForm = (props) => {
+    const usernameRef = useRef(null);
+    const passwordRef = useRef(null);
+    const nickRef = useRef(null);
+    const [errors, setErrors] = useState(false)
     const classes = useStyles();
-
-    useEffect(() => {
-        if (!props.gameStarted) {
-            // props.history.replace('/')
-        }
-    }, [])
 
     const onSubmit = (e) => {
         e.preventDefault()
+        const username = usernameRef.current.value;
+        const password = passwordRef.current.value;
+        const nick = nickRef.current.value;
 
-        const {
-            props: {
-                setupApp,
-                history
-            },
-            refs: {
-                nickName: {
-                    value: nickNameVal
-                },
-                difficulty: {
-                    value: difficultyVal
-                }
-            }
-        } = this
-
-        if (!nickNameVal.length) {
-            window.alert('Please enter the name :)')
-            return
-        }
-
-        setupApp(nickNameVal, difficultyVal, () => {
-            history.push('/game')
-        })
+        props.register(username, password, nick, setErrors);
     }
 
     return (
@@ -93,9 +74,9 @@ const RegisterForm = (props) => {
                             fullWidth
                             id="username"
                             label="Username"
-                            name="username"
                             autoComplete="username"
                             autoFocus
+                            inputRef={usernameRef}
                         />
                         <TextField
                             variant="outlined"
@@ -107,6 +88,8 @@ const RegisterForm = (props) => {
                             name="Nick"
                             autoComplete="nick"
                             autoFocus
+                            inputRef={nickRef}
+
                         />
                         <TextField
                             variant="outlined"
@@ -118,8 +101,12 @@ const RegisterForm = (props) => {
                             type="password"
                             id="password"
                             autoComplete="current-password"
-                        />
+                            inputRef={passwordRef}
 
+                        />
+                        {errors && (
+                            <Alert severity="error">Try again!</Alert>
+                        )}
                         <Button
                             type="submit"
                             fullWidth
@@ -135,13 +122,12 @@ const RegisterForm = (props) => {
     )
 }
 
-RegisterForm.propTypes = {
-    setupApp: PropTypes.func,
-    gameStarted: PropTypes.bool,
-    history: PropTypes.object
+RegisterForm.propTypes = {}
+const mapDispatchToProps = {
+    register
 }
+export default connect(null, mapDispatchToProps)(RegisterForm)
 
-export default RegisterForm
 
 
 

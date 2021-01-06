@@ -7,7 +7,7 @@ import {
     SET_QUESTIONS,
     SET_USER,
 } from '../store/actionTypes'
-import {fetchQuestions, loginRequest} from "../api/quiz.api";
+import {fetchQuestions, loginRequest, registerRequest} from "../api/quiz.api";
 import history from "../history";
 
 const setUserAction = data => ({
@@ -46,6 +46,18 @@ const setCurrentQuestionAnswersAction = data => ({
 export const login = (username, password, setErrors) => async (dispatch) => {
     try {
         const {data} = await loginRequest(username, password);
+        if (!data) setErrors(true)
+        dispatch(setUserAction(data))
+        history.push('/dashboard')
+    } catch (e) {
+        console.error(e)
+        setErrors(true)
+    }
+}
+
+export const register = (username, password, nick, setErrors) => async (dispatch) => {
+    try {
+        const {data} = await registerRequest(username, password, nick);
         if (!data) setErrors(true)
         dispatch(setUserAction(data))
         history.push('/dashboard')
