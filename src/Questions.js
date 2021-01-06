@@ -38,16 +38,16 @@ class Questions extends React.Component {
 
   render () {
     const {
-      currentQuestion
+        currentQuestion
     } = this.props
-
+      const answers = [...currentQuestion.incorrectAnswers, currentQuestion.correctAnswer]
     return (
       <div className='c-questions'>
         <p className='c-questions__title c-question'>
           {currentQuestion.question}
         </p>
         <ul className='c-questions__list'>
-          {currentQuestion.answers.map(this.renderItem)}
+            {answers.map(this.renderItem)}
         </ul>
       </div>
     )

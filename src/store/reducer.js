@@ -1,23 +1,18 @@
 import {applyMiddleware, combineReducers, compose, createStore} from 'redux'
 import thunk from 'redux-thunk'
 import {
-    GET_QUESTIONS,
     RESET_GAME,
     SET_BAD_ANSWER,
     SET_CURRENT_QUESTION_ANSWERS,
     SET_GAME_STARTED,
     SET_GOOD_ANSWER,
-    SET_USER,
-    USE_CALL_FRIEND_LINE,
-    USE_HALF_ON_HALF_LINE,
-    USE_SPECTATORS_LINE
+    SET_QUESTIONS,
+    SET_USER
 } from './actionTypes'
 
 const mainDefaultState = {
     gameStarted: false,
-    login: '',
-    nick: '',
-    difficulty: '',
+    user: {},
     hasWon: false,
     isGameFinished: false
 }
@@ -28,9 +23,6 @@ const gameReducerDefaultState = {
     answers: [],
     currentQuestionNumber: 0,
     answer: {},
-    callFriendUsed: false,
-    spectatorsUsed: false,
-    halfOnHalfUsed: false
 }
 
 const mainReducer = (state = mainDefaultState, action) => {
@@ -64,7 +56,7 @@ const mainReducer = (state = mainDefaultState, action) => {
 const gameReducer = (state = gameReducerDefaultState, action) => {
     const {type, payload} = action
     switch (type) {
-        case GET_QUESTIONS: {
+        case SET_QUESTIONS: {
             return {
                 ...state,
                 questions: payload,
@@ -76,21 +68,6 @@ const gameReducer = (state = gameReducerDefaultState, action) => {
                 ...state,
                 currentQuestionNumber: ++state.currentQuestionNumber,
                 currentQuestion: state.questions[state.currentQuestionNumber++]
-            }
-        case USE_SPECTATORS_LINE:
-            return {
-                ...state,
-                spectatorsUsed: true
-            }
-        case USE_CALL_FRIEND_LINE:
-            return {
-                ...state,
-                callFriendUsed: true
-            }
-        case USE_HALF_ON_HALF_LINE:
-            return {
-                ...state,
-                halfOnHalfUsed: true
             }
         case SET_CURRENT_QUESTION_ANSWERS:
             return {

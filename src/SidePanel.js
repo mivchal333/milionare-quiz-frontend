@@ -1,6 +1,5 @@
 import React from 'react'
 import QuestionsList from './QuestionsList'
-import LifeLines from './LifeLines'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 
@@ -12,7 +11,6 @@ class SidePanel extends React.Component {
 
     return (
       <div className='c-side'>
-        <LifeLines/>
         <QuestionsList
             currentQuestionNumber={currentQuestionNumber}
         />

@@ -10,4 +10,6 @@ export const loginRequest = (username, password) => api.post('/login', {
 })
 
 
+export const fetchQuestions = () => api.get('/question')
+
 export default api;

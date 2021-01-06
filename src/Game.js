@@ -8,75 +8,73 @@ import {connect} from 'react-redux'
 import {getQuestions, resetGame} from './actions/actions'
 
 class Game extends Component {
-  constructor(props) {
-    super(props)
+    constructor(props) {
+        super(props)
 
-    this.resetGame = this.resetGame.bind(this)
-  }
-
-  componentDidMount() {
-    const {
-      appSettings: {
-        nick,
-        difficulty,
-        gameStarted
-      },
-      history
-    } = this.props
-
-    if (!nick || !difficulty || !gameStarted) {
-      history.replace('/')
-      return
+        this.resetGame = this.resetGame.bind(this)
     }
 
-    this.props.getQuestions()
-  }
+    componentDidMount() {
+        const {
+            appSettings: {
+                user,
+                gameStarted
+            },
+            history
+        } = this.props
+        if (!user || !gameStarted) {
+            history.replace('/')
+            return
+        }
 
-  async resetGame() {
-    await this.props.resetGame()
-    this.props.history.push('/')
-  }
-
-  render() {
-    const {
-      questions,
-      isGameFinished
-    } = this.props
-
-    if (!questions.length) {
-      return null
+        this.props.getQuestions()
     }
 
-    return isGameFinished
-        ? (
-            <EndScreen/>
-        )
-        : (
-            <div className='l-game'>
-              <Background>
-                <div className='c-questions'>
-                  <Questions/>
+    async resetGame() {
+        await this.props.resetGame()
+        this.props.history.push('/')
+    }
+
+    render() {
+        const {
+            questions,
+            isGameFinished
+        } = this.props
+
+        if (!questions.length) {
+            return null
+        }
+
+        return isGameFinished
+            ? (
+                <EndScreen/>
+            )
+            : (
+                <div className='l-game'>
+                    <Background>
+                        <div className='c-questions'>
+                            <Questions/>
+                        </div>
+                    </Background>
+                    <SidePanel/>
                 </div>
-              </Background>
-              <SidePanel/>
-        </div>
-        )
-  }
+            )
+    }
 }
 
 Game.propTypes = {
-  appSettings: PropTypes.object,
-  history: PropTypes.object,
-  resetGame: PropTypes.func
+    appSettings: PropTypes.object,
+    history: PropTypes.object,
+    resetGame: PropTypes.func
 }
 
 const mapStateToProps = state => ({
-  appSettings: state.global,
-  questions: state.game.questions,
-  isGameFinished: state.global.isGameFinished
+    appSettings: state.global,
+    questions: state.game.questions,
+    isGameFinished: state.global.isGameFinished
 })
 
 export default connect(mapStateToProps, {
-  resetGame,
-  getQuestions
+    resetGame,
+    getQuestions
 })(Game)
