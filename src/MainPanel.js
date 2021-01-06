@@ -20,6 +20,7 @@ import EqualizerIcon from '@material-ui/icons/Equalizer';
 import {connect} from "react-redux";
 import AddIcon from '@material-ui/icons/Add';
 import LiveHelpIcon from '@material-ui/icons/LiveHelp';
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 
 const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
@@ -115,12 +116,8 @@ const MainPanel = (props) => {
                     </IconButton>
                     <LiveHelpIcon/>
                     <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-                        Milionare quiz
+                        Millionaire quiz
                     </Typography>
-                    {/*{props.user.id*/}
-                    {/*    ? <Button color="inherit" onClick={onLogout}>Logout</Button>*/}
-                    {/*    : <Button color="inherit" component={Link} to="/login">Login</Button>*/}
-                    {/*}*/}
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -136,34 +133,54 @@ const MainPanel = (props) => {
                 </div>
                 <Divider/>
                 <List>
-                    <ListItem button component={Link} to="/game">
-                        <ListItemIcon>
-                            <PlayArrowIcon/>
-                        </ListItemIcon>
-                        <ListItemText primary="Play"/>
-                    </ListItem>
+                    {props.user.username ? (
+                            <>
+                                <ListItem button component={Link} to="/game">
+                                    <ListItemIcon>
+                                        <PlayArrowIcon/>
+                                    </ListItemIcon>
+                                    <ListItemText primary="Play"/>
+                                </ListItem>
 
-                    <Divider/>
+                                <Divider/>
 
-                    <ListItem button component={Link} to="/stats">
-                        <ListItemIcon>
-                            <EqualizerIcon/>
-                        </ListItemIcon>
-                        <ListItemText primary="Statistics"/>
-                    </ListItem>
+                                <ListItem button component={Link} to="/stats">
+                                    <ListItemIcon>
+                                        <EqualizerIcon/>
+                                    </ListItemIcon>
+                                    <ListItemText primary="Statistics"/>
+                                </ListItem>
 
-                    <ListItem button component={Link} to="/questionAdd">
-                        <ListItemIcon>
-                            <AddIcon/>
-                        </ListItemIcon>
-                        <ListItemText primary="Add question"/>
-                    </ListItem>
+                                <ListItem button component={Link} to="/questionAdd">
+                                    <ListItemIcon>
+                                        <AddIcon/>
+                                    </ListItemIcon>
+                                    <ListItemText primary="Add question"/>
+                                </ListItem>
+                            </>
+                        )
+                        :
+                        <>
+                            <ListItem button component={Link} to="/login">
+                                <ListItemIcon>
+                                    <LockOutlinedIcon/>
+                                </ListItemIcon>
+                                <ListItemText primary="Login"/>
+                            </ListItem>
+
+                            <ListItem button component={Link} to="/register">
+                                <ListItemIcon>
+                                    <LockOutlinedIcon/>
+                                </ListItemIcon>
+                                <ListItemText primary="Register"/>
+                            </ListItem>
+                        </>}
                 </List>
             </Drawer>
         </>
     );
 }
 const mapStateToProps = state => ({
-    user: state.user
+    user: state.global.user
 })
 export default connect(mapStateToProps)(MainPanel);

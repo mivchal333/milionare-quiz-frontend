@@ -38,7 +38,7 @@ const mainReducer = (state = mainDefaultState, action) => {
                 ...state,
                 user: {
                     nick: payload.nick,
-                    login: payload.login
+                    username: payload.username
                 }
             }
         case SET_BAD_ANSWER:

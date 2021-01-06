@@ -221,13 +221,14 @@ body {
 }
 
 .l-centered {
+  height: 100vh;
+  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;
   background-color: #f48fb1;
   background-size: 100%;
 }
-
 .c-start-link {
   cursor: pointer;
   display: block;
