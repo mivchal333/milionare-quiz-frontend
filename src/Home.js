@@ -6,18 +6,18 @@ import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
 import * as PropTypes from "prop-types";
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
-import {Button} from "@material-ui/core";
+import {Button, Card} from "@material-ui/core";
 import {Link} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
-        marginTop: theme.spacing(8),
+        marginTop: theme.spacing(3),
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
     },
     avatar: {
-        margin: theme.spacing(1),
+        margin: theme.spacing(2),
         backgroundColor: theme.palette.secondary.main,
     },
     submit: {
@@ -27,7 +27,9 @@ const useStyles = makeStyles((theme) => ({
 const Home = props => {
     const classes = useStyles();
     return (
+        <div className='l-centered'>
         <Container component="main" maxWidth="xs">
+            <Card>
             <CssBaseline/>
             <div className={classes.paper}>
                 <Avatar className={classes.avatar}>
@@ -46,7 +48,9 @@ const Home = props => {
                     Continue
                 </Button>
             </div>
+            </Card>
         </Container>
+        </div>
     )
 }
 

@@ -42,7 +42,7 @@ body {
 }
 
 .c-background {
-  background: url('./images/bg2.jpg') 50% 50% no-repeat;
+  background-color: #f06292;
   background-size: auto 100%;
   display: flex;
   align-items: flex-end;
@@ -225,7 +225,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  background: url('./images/bg.jpg') 50% 50% no-repeat;
+  background-color: #f48fb1;
   background-size: 100%;
 }
 
