@@ -1,18 +1,22 @@
 import axios from 'axios'
 
-const questionsUrl = 'http://localhost:8081/question'
+const questionsUrl = 'https://react-workshop-api.herokuapp.com/'
 
-export const fetchQuestions = () => axios.get(questionsUrl)
-.then(({ data: { results = [] } }) => results.map(({
-  category,
-  question,
-  correct_answer,
-  incorrect_answers
-}) => ({
-  category,
-  question,
-  correctAnswer: correct_answer,
-  incorrectAnswers: incorrect_answers
+export const fetchQuestions = difficulty => axios.get(questionsUrl, {
+  params: {
+    difficulty
+  }
+})
+    .then(({data: {results = []}}) => results.map(({
+                                                     category,
+                                                     question,
+                                                     correct_answer,
+                                                     incorrect_answers
+                                                   }) => ({
+      category,
+      question,
+      correctAnswer: correct_answer,
+      incorrectAnswers: incorrect_answers
 })))
 
 export const questionsList = [

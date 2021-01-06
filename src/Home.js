@@ -8,6 +8,8 @@ import * as PropTypes from "prop-types";
 import HelpOutlineIcon from '@material-ui/icons/HelpOutline';
 import {Button, Card} from "@material-ui/core";
 import {Link} from "react-router-dom";
+import {connect} from "react-redux";
+import {setGameStarted} from "./actions/actions";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -57,4 +59,5 @@ const Home = props => {
 Home.propTypes = {
     setGameStarted: PropTypes.func
 }
-export default Home
+
+export default connect(null, {setGameStarted})(Home)

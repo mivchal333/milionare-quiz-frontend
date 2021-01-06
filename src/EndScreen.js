@@ -1,18 +1,18 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {
-  getGuaranteedReward
-} from './helpers'
+import {getGuaranteedReward} from './helpers'
+import {connect} from 'react-redux'
+import {resetGame} from './actions/actions'
 
 const EndScreen = props => {
-  const {
-    hasWon,
-    currentQuestionNumber,
-    resetGame
-  } = props
-  const reward = hasWon
-    ? 1000000
-    : getGuaranteedReward(currentQuestionNumber)
+    const {
+        hasWon,
+        currentQuestionNumber,
+        resetGame
+    } = props
+    const reward = hasWon
+        ? 1000000
+        : getGuaranteedReward(currentQuestionNumber)
 
   return (
     <div className='l-end'>
@@ -31,9 +31,14 @@ const EndScreen = props => {
 }
 
 EndScreen.propTypes = {
-  hasWon: PropTypes.bool,
-  currentQuestionNumber: PropTypes.number,
-  resetGame: PropTypes.func
+    hasWon: PropTypes.bool,
+    currentQuestionNumber: PropTypes.number,
+    resetGame: PropTypes.func
 }
 
-export default EndScreen
+const mapStateToProps = state => ({
+    hasWon: state.global.hasWon,
+    currentQuestionNumber: state.game.currentQuestionNumber
+})
+
+export default connect(mapStateToProps, {resetGame})(EndScreen)

@@ -1,6 +1,8 @@
 import React from 'react'
 import QuestionsList from './QuestionsList'
+import LifeLines from './LifeLines'
 import PropTypes from 'prop-types'
+import {connect} from 'react-redux'
 
 class SidePanel extends React.Component {
   render () {
@@ -10,8 +12,9 @@ class SidePanel extends React.Component {
 
     return (
       <div className='c-side'>
+        <LifeLines/>
         <QuestionsList
-          currentQuestionNumber={currentQuestionNumber}
+            currentQuestionNumber={currentQuestionNumber}
         />
       </div>
     )
@@ -20,6 +23,13 @@ class SidePanel extends React.Component {
 
 SidePanel.propTypes = {
   currentQuestionNumber: PropTypes.number,
+  correctAnswer: PropTypes.string,
+  answers: PropTypes.array,
+  setCurrentQuestionAnswers: PropTypes.func
 }
 
-export default SidePanel
+const mapStateToProps = state => ({
+  currentQuestionNumber: state.game.currentQuestionNumber
+})
+
+export default connect(mapStateToProps)(SidePanel)
