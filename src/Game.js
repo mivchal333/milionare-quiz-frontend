@@ -1,7 +1,6 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import Questions from './Questions'
-import Background from './Background'
 import SidePanel from './SidePanel'
 import EndScreen from './EndScreen'
 import {connect} from 'react-redux'
@@ -15,18 +14,6 @@ class Game extends Component {
     }
 
     componentDidMount() {
-        const {
-            appSettings: {
-                user,
-                gameStarted
-            },
-            history
-        } = this.props
-        if (!user || !gameStarted) {
-            history.replace('/')
-            return
-        }
-
         this.props.getQuestions()
     }
 
@@ -51,11 +38,9 @@ class Game extends Component {
             )
             : (
                 <div className='l-game'>
-                    <Background>
-                        <div className='c-questions'>
-                            <Questions/>
-                        </div>
-                    </Background>
+                    <div className='c-questions'>
+                        <Questions/>
+                    </div>
                     <SidePanel/>
                 </div>
             )

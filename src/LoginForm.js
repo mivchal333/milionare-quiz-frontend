@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react'
+import React, {useRef, useState} from 'react'
 import PropTypes from 'prop-types'
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
@@ -9,8 +9,9 @@ import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import {Card} from "@material-ui/core";
-import {login} from "../actions/actions";
+import {login} from "./actions/actions";
 import {connect} from "react-redux";
+import {Alert} from '@material-ui/lab';
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -41,25 +42,15 @@ const useStyles = makeStyles((theme) => ({
 const LoginForm = (props) => {
     const usernameRef = useRef(null);
     const passwordRef = useRef(null);
+    const [errors, setErrors] = useState(false)
     const classes = useStyles();
-
-    useEffect(() => {
-        if (!props.gameStarted) {
-            // props.history.replace('/')
-        }
-    }, [])
 
     const onSubmit = (e) => {
         e.preventDefault()
         const username = usernameRef.current.value;
         const password = passwordRef.current.value;
 
-        if (!username.length) {
-            window.alert('Please enter the name :)')
-            return
-        }
-
-        props.login(username, password);
+        props.login(username, password, setErrors);
     }
 
     return (
@@ -99,6 +90,9 @@ const LoginForm = (props) => {
                             id="password"
                             autoComplete="current-password"
                         />
+                        {errors && (
+                            <Alert severity="error">Try again!</Alert>
+                        )}
 
                         <Button
                             type="submit"

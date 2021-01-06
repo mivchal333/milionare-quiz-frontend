@@ -41,7 +41,7 @@ body {
   to { transform: rotate(360deg); }
 }
 
-.c-background {
+.l-game {
   background-color: #f06292;
   background-size: auto 100%;
   display: flex;
@@ -73,6 +73,7 @@ body {
   box-shadow: inset 4px 4px 20px 0 #062a67, inset -4px -4px 20px 0 #062a67;
   position: relative;
   transition: 230ms;
+  flex-grow: 1;
 }
 
 .c-question:not(.c-questions__title) {
@@ -220,8 +221,6 @@ body {
 }
 
 .l-centered {
-  height: 100vh;
-  width: 100vw;
   display: flex;
   align-items: center;
   justify-content: center;

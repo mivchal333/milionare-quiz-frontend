@@ -43,13 +43,15 @@ const setCurrentQuestionAnswersAction = data => ({
     payload: data
 })
 
-export const login = (username, password) => async (dispatch) => {
+export const login = (username, password, setErrors) => async (dispatch) => {
     try {
         const {data} = await loginRequest(username, password);
+        if (!data) setErrors(true)
         dispatch(setUserAction(data))
-        history.push('/game')
+        history.push('/dashboard')
     } catch (e) {
         console.error(e)
+        setErrors(true)
     }
 }
 
