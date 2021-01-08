@@ -1,15 +1,16 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {Route, Switch} from 'react-router-dom'
-import Home from './Home'
-import Game from './Game'
+import Home from './components/Home'
+import Game from './components/Game'
 import history from './history'
 import {Router} from "react-router";
-import MainPanel from "./MainPanel";
-import LoginForm from "./LoginForm";
-import RegisterForm from "./RegisterForm";
-import MenuCard from "./MenuCard";
+import MainPanel from "./components/MainPanel";
+import LoginForm from "./components/LoginForm";
+import RegisterForm from "./components/RegisterForm";
+import MenuCard from "./components/MenuCard";
 import {makeStyles} from "@material-ui/core/styles";
+import Statistics from "./components/statistics/Statistics";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -48,6 +49,10 @@ const App = (props) => {
                     <Route
                         exact path='/game'
                         component={Game}
+                    />
+                    <Route
+                        exact path='/stats'
+                        component={Statistics}
                     />
                 </div>
             </Switch>

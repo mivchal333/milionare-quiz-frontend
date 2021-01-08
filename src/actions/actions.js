@@ -5,9 +5,10 @@ import {
     SET_GAME_STARTED,
     SET_GOOD_ANSWER,
     SET_QUESTIONS,
+    SET_STATS,
     SET_USER,
 } from '../store/actionTypes'
-import {fetchQuestions, loginRequest, registerRequest} from "../api/quiz.api";
+import {fetchQuestions, getStatsRequest, loginRequest, registerRequest} from "../api/quiz.api";
 import history from "../history";
 
 const setUserAction = data => ({
@@ -42,6 +43,10 @@ const setCurrentQuestionAnswersAction = data => ({
     type: SET_CURRENT_QUESTION_ANSWERS,
     payload: data
 })
+const setStatsAction = data => ({
+    type: SET_STATS,
+    payload: data
+})
 
 export const login = (username, password, setErrors) => async (dispatch) => {
     try {
@@ -65,6 +70,11 @@ export const register = (username, password, nick, setErrors) => async (dispatch
         console.error(e)
         setErrors(true)
     }
+}
+export const fetchStats = () => async (dispatch, getState) => {
+    const {user} = getState().global;
+    const {data} = await getStatsRequest(user.username);
+    dispatch(setStatsAction(data))
 }
 
 export const setGameStarted = () => dispatch => {

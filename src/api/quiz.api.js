@@ -13,6 +13,12 @@ export const registerRequest = (username, password, nick) => api.post('/register
     password,
     nick
 })
+export const getStatsRequest = (username) => api.get('/stats', {
+    params:
+        {
+            username
+        }
+})
 
 
 export const fetchQuestions = () => api.get('/question')

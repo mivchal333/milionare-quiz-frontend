@@ -10,7 +10,7 @@ import Container from '@material-ui/core/Container';
 import {Card} from "@material-ui/core";
 import {connect} from "react-redux";
 import {Alert} from "@material-ui/lab";
-import {register} from './actions/actions'
+import {register} from '../actions/actions'
 
 const useStyles = makeStyles((theme) => ({
     paper: {

@@ -1,8 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {getGuaranteedReward} from './helpers'
+import {getGuaranteedReward} from '../helpers'
 import {connect} from 'react-redux'
-import {resetGame} from './actions/actions'
+import {resetGame} from '../actions/actions'
 
 const EndScreen = props => {
     const {

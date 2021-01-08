@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {questionsList} from './helpers.js'
+import {questionsList} from '../helpers.js'
 
 class QuestionsList extends React.Component {
   constructor (props) {

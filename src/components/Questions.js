@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
-import {setAnswer} from './actions/actions'
+import {setAnswer} from '../actions/actions'
 
 class Questions extends React.Component {
   constructor(props) {

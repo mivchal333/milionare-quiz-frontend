@@ -7,14 +7,18 @@ import {
     SET_GAME_STARTED,
     SET_GOOD_ANSWER,
     SET_QUESTIONS,
+    SET_STATS,
     SET_USER
 } from './actionTypes'
 
 const mainDefaultState = {
     gameStarted: false,
-    user: {},
+    user: {
+        username: 'user'
+    },
     hasWon: false,
-    isGameFinished: false
+    isGameFinished: false,
+    stats: [],
 }
 
 const gameReducerDefaultState = {
@@ -45,6 +49,11 @@ const mainReducer = (state = mainDefaultState, action) => {
             return {
                 ...state,
                 isGameFinished: true
+            }
+        case SET_STATS:
+            return {
+                ...state,
+                stats: payload
             }
         case RESET_GAME:
             return mainDefaultState

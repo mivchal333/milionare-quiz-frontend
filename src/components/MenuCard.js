@@ -5,7 +5,7 @@ import Container from '@material-ui/core/Container';
 import {Button, Card} from "@material-ui/core";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-import {setGameStarted} from "./actions/actions";
+import {setGameStarted} from "../actions/actions";
 import AddIcon from "@material-ui/icons/Add";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import EqualizerIcon from "@material-ui/icons/Equalizer";
