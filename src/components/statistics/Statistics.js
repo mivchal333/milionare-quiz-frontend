@@ -254,7 +254,7 @@ const EnhancedTable = ({stats, fetchStats}) => {
                     </Table>
                 </TableContainer>
                 <TablePagination
-                    rowsPerPageOptions={[5, 10, 25]}
+                    rowsPerPageOptions={[5, 10]}
                     component="div"
                     count={stats.length}
                     rowsPerPage={rowsPerPage}
