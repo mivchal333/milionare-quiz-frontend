@@ -56,7 +56,7 @@ const MenuCard = props => {
                         </Button>
                         <Button
                             variant="contained"
-                            color="secondary" component={Link} to="/addQuestion"
+                            color="secondary" component={Link} to="/questionAdd"
                             className={classes.submit}
                             startIcon={<AddIcon/>}
                         >

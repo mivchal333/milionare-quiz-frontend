@@ -15,9 +15,7 @@ import {
 
 const mainDefaultState = {
     gameStarted: false,
-    user: {
-        username: 'user'
-    },
+    user: {},
     hasWon: false,
     isGameFinished: false,
     stats: [],
@@ -27,7 +25,7 @@ const gameReducerDefaultState = {
     questions: [],
     currentQuestion: {},
     answers: [],
-    currentQuestionNumber: 9,
+    currentQuestionNumber: 0,
     answer: {},
 }
 
@@ -64,7 +62,12 @@ const mainReducer = (state = mainDefaultState, action) => {
             }
 
         case RESET_GAME:
-            return mainDefaultState
+            return {
+                ...state,
+                hasWon: false,
+                gameStarted: false,
+                isGameFinished: false,
+            }
         default:
             return state
     }
