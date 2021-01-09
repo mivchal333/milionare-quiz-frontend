@@ -10,7 +10,14 @@ import {
     SET_STATS,
     SET_USER,
 } from '../store/actionTypes'
-import {fetchQuestions, getStatsRequest, loginRequest, registerRequest, saveAttemptRequest} from "../api/quiz.api";
+import {
+    fetchQuestions,
+    getStatsRequest,
+    loginRequest,
+    postQuestion,
+    registerRequest,
+    saveAttemptRequest
+} from "../api/quiz.api";
 import history from "../history";
 import {questionsList} from "../helpers";
 
@@ -107,6 +114,11 @@ export const getQuestions = () => async dispatch => {
     const {data} = await fetchQuestions()
 
     dispatch(setQuestionsAction(data))
+}
+
+export const addQuestion = (question, correctAnswer, incorrectAnswers) => async dispatch => {
+    postQuestion(question, correctAnswer, incorrectAnswers)
+    history.push('/dashboard')
 }
 
 export const setAnswer = goodAnswer => (dispatch, getState) => {

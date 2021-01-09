@@ -11,6 +11,7 @@ import RegisterForm from "./components/RegisterForm";
 import MenuCard from "./components/MenuCard";
 import {makeStyles} from "@material-ui/core/styles";
 import Statistics from "./components/statistics/Statistics";
+import AddQuestionForm from "./components/AddQuestionForm";
 
 const useStyles = makeStyles((theme) => ({
 
@@ -53,6 +54,10 @@ const App = (props) => {
                     <Route
                         exact path='/stats'
                         component={Statistics}
+                    />
+                    <Route
+                        exact path='/questionAdd'
+                        component={AddQuestionForm}
                     />
                 </div>
             </Switch>
