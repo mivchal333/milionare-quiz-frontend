@@ -7,9 +7,13 @@ import {connect} from 'react-redux'
 import {getQuestions, resetGame} from '../actions/actions'
 
 class Game extends Component {
-
-
     componentDidMount() {
+        window.onbeforeunload = confirmExit;
+
+        function confirmExit() {
+            return "Are you sure?";
+        }
+
         this.props.getQuestions()
     }
 
