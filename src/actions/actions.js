@@ -2,14 +2,17 @@ import {
     RESET_GAME,
     SET_BAD_ANSWER,
     SET_CURRENT_QUESTION_ANSWERS,
+    SET_CURRENT_QUESTION_NUMBER,
+    SET_GAME_FINISHED,
     SET_GAME_STARTED,
     SET_GOOD_ANSWER,
     SET_QUESTIONS,
     SET_STATS,
     SET_USER,
 } from '../store/actionTypes'
-import {fetchQuestions, getStatsRequest, loginRequest, registerRequest} from "../api/quiz.api";
+import {fetchQuestions, getStatsRequest, loginRequest, registerRequest, saveAttemptRequest} from "../api/quiz.api";
 import history from "../history";
+import {questionsList} from "../helpers";
 
 const setUserAction = data => ({
     type: SET_USER,
@@ -47,6 +50,14 @@ const setStatsAction = data => ({
     type: SET_STATS,
     payload: data
 })
+const setCurrentQuestionNumber = data => ({
+    type: SET_CURRENT_QUESTION_NUMBER,
+    payload: data
+})
+const setGameFinished = data => ({
+    type: SET_GAME_FINISHED,
+    payload: data
+})
 
 export const login = (username, password, setErrors) => async (dispatch) => {
     try {
@@ -77,12 +88,19 @@ export const fetchStats = () => async (dispatch, getState) => {
     dispatch(setStatsAction(data))
 }
 
+export const saveAttempt = (prize) => async (dispatch, getState) => {
+    const {user} = getState().global;
+    saveAttemptRequest(user.username, prize);
+}
+
 export const setGameStarted = () => dispatch => {
     dispatch(setGameStartedAction())
 }
 
 export const resetGame = () => dispatch => {
     dispatch(resetGameAction())
+    dispatch(setCurrentQuestionNumber(0))
+    history.push('/dashboard')
 }
 
 export const getQuestions = () => async dispatch => {
@@ -91,8 +109,12 @@ export const getQuestions = () => async dispatch => {
     dispatch(setQuestionsAction(data))
 }
 
-export const setAnswer = goodAnswer => dispatch => {
+export const setAnswer = goodAnswer => (dispatch, getState) => {
     if (goodAnswer) {
+        const {currentQuestionNumber} = getState().game
+        if (currentQuestionNumber === questionsList.length - 1) {
+            dispatch(setGameFinished(true))
+        }
         dispatch(setGoodAnswerAction())
     } else {
         dispatch(setBadAnswerAction())

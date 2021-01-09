@@ -241,7 +241,7 @@ const EnhancedTable = ({stats, fetchStats}) => {
                                             </TableCell>
                                             <TableCell align="right">{entry.prize}</TableCell>
                                             <TableCell
-                                                align="right">{new Date(entry.date).toLocaleDateString()}</TableCell>
+                                                align="right">{new Date(entry.date).toLocaleString()}</TableCell>
                                         </TableRow>
                                     );
                                 })}

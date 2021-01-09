@@ -4,6 +4,8 @@ import {
     RESET_GAME,
     SET_BAD_ANSWER,
     SET_CURRENT_QUESTION_ANSWERS,
+    SET_CURRENT_QUESTION_NUMBER,
+    SET_GAME_FINISHED,
     SET_GAME_STARTED,
     SET_GOOD_ANSWER,
     SET_QUESTIONS,
@@ -25,7 +27,7 @@ const gameReducerDefaultState = {
     questions: [],
     currentQuestion: {},
     answers: [],
-    currentQuestionNumber: 0,
+    currentQuestionNumber: 9,
     answer: {},
 }
 
@@ -55,6 +57,12 @@ const mainReducer = (state = mainDefaultState, action) => {
                 ...state,
                 stats: payload
             }
+        case SET_GAME_FINISHED:
+            return {
+                ...state,
+                isGameFinished: action.payload
+            }
+
         case RESET_GAME:
             return mainDefaultState
         default:
@@ -85,6 +93,11 @@ const gameReducer = (state = gameReducerDefaultState, action) => {
                     ...state.currentQuestion,
                     answers: payload
                 }
+            }
+        case SET_CURRENT_QUESTION_NUMBER:
+            return {
+                ...state,
+                currentQuestionNumber: 0
             }
         default:
             return state

@@ -4,23 +4,15 @@ import Questions from './Questions'
 import SidePanel from './SidePanel'
 import EndScreen from './EndScreen'
 import {connect} from 'react-redux'
-import {getQuestions, resetGame} from '../actions/actions'
+import {getQuestions} from '../actions/actions'
 
 class Game extends Component {
-    constructor(props) {
-        super(props)
 
-        this.resetGame = this.resetGame.bind(this)
-    }
 
     componentDidMount() {
         this.props.getQuestions()
     }
 
-    async resetGame() {
-        await this.props.resetGame()
-        this.props.history.push('/')
-    }
 
     render() {
         const {
@@ -60,6 +52,5 @@ const mapStateToProps = state => ({
 })
 
 export default connect(mapStateToProps, {
-    resetGame,
     getQuestions
 })(Game)

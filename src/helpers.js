@@ -43,10 +43,6 @@ export const questionsList = [
     price: 1000,
     isGuaranteed: true
   },
-  {
-    price: 500,
-    isGuaranteed: false
-  }
 ]
 
 export const getGuaranteedReward = questionNumber => {

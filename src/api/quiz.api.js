@@ -19,6 +19,10 @@ export const getStatsRequest = (username) => api.get('/stats', {
             username
         }
 })
+export const saveAttemptRequest = (username, prize) => api.post('/stats', {
+    username,
+    prize,
+})
 
 
 export const fetchQuestions = () => api.get('/question')
