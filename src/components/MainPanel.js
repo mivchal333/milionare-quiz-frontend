@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
             easing: theme.transitions.easing.sharp,
             duration: theme.transitions.duration.leavingScreen,
         }),
+        backgroundColor: '#0f4288',
     },
     appBarShift: {
         marginLeft: drawerWidth,
@@ -103,7 +104,9 @@ const MainPanel = (props) => {
     return (
         <>
             <CssBaseline/>
-            <AppBar position="fixed" className={clsx(classes.appBar, open && classes.appBarShift)}>
+            <AppBar position="fixed"
+                    className={clsx(classes.appBar, open && classes.appBarShift)}
+            >
                 <Toolbar className={classes.toolbar}>
                     <IconButton
                         edge="start"
