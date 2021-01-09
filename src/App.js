@@ -15,7 +15,7 @@ import Statistics from "./components/statistics/Statistics";
 const useStyles = makeStyles((theme) => ({
 
     lCentered: {
-        marginLeft: theme.spacing(9),
+        paddingLeft: theme.spacing(9),
     }
 }));
 const App = (props) => {

@@ -24,7 +24,7 @@ const EndScreen = props => {
         onClick={resetGame}
         className='c-start-link'
       >
-        Reset Game
+        Menu
       </button>
     </div>
   )
