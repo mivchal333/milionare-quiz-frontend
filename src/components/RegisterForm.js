@@ -87,7 +87,6 @@ const RegisterForm = (props) => {
                             label="Nick"
                             name="Nick"
                             autoComplete="nick"
-                            autoFocus
                             inputRef={nickRef}
 
                         />
