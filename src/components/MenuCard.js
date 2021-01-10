@@ -9,6 +9,7 @@ import {setGameStarted} from "../actions/actions";
 import AddIcon from "@material-ui/icons/Add";
 import PlayArrowIcon from "@material-ui/icons/PlayArrow";
 import EqualizerIcon from "@material-ui/icons/Equalizer";
+import history from '../history'
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -30,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
     }
 }));
 const MenuCard = props => {
+    if (!props.user || !props.user.username) {
+        history.replace('/')
+    }
     const classes = useStyles();
     return (
         <Container component="main" maxWidth={"md"}>
@@ -68,5 +72,7 @@ const MenuCard = props => {
         </Container>
     )
 }
-
-export default connect(null, {setGameStarted})(MenuCard)
+const mapStateToProps = state => ({
+    user: state.global.user
+})
+export default connect(mapStateToProps, {setGameStarted})(MenuCard)

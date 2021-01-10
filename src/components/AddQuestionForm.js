@@ -8,6 +8,7 @@ import Container from '@material-ui/core/Container';
 import {Card} from "@material-ui/core";
 import {addQuestion} from "../actions/actions";
 import {connect} from "react-redux";
+import history from "../history";
 
 const useStyles = makeStyles((theme) => ({
     paper: {
@@ -37,12 +38,17 @@ const useStyles = makeStyles((theme) => ({
 
 const AddQuestionForm
     = (props) => {
+    if (!props.user || !props.user.username) {
+        history.replace('/')
+    }
+
     const questionRef = useRef(null);
     const correctAnswerRef = useRef(null);
     const incorrectAnswer1Ref = useRef(null);
     const incorrectAnswer2Ref = useRef(null);
     const incorrectAnswer3Ref = useRef(null);
     const classes = useStyles();
+
 
     const onSubmit = (e) => {
         e.preventDefault()
@@ -123,7 +129,10 @@ const AddQuestionForm
 const mapDispatchToProps = {
     addQuestion
 }
-export default connect(null, mapDispatchToProps)(AddQuestionForm
+const mapStateToProps = state => ({
+    user: state.global.user
+})
+export default connect(mapStateToProps, mapDispatchToProps)(AddQuestionForm
 )
 
 

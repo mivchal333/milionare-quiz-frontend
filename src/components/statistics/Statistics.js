@@ -19,6 +19,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 import DeleteIcon from '@material-ui/icons/Delete';
 import FilterListIcon from '@material-ui/icons/FilterList';
 import PropTypes from 'prop-types'
+import history from "../../history";
 
 function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -173,11 +174,14 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const EnhancedTable = ({stats, fetchStats}) => {
+const EnhancedTable = ({stats, fetchStats, user}) => {
     useEffect(() => {
         fetchStats();
     }, [])
 
+    if (!user || !user.username) {
+        history.replace('/')
+    }
     const classes = useStyles();
     const [order, setOrder] = React.useState('asc');
     const [orderBy, setOrderBy] = React.useState('calories');
@@ -272,7 +276,8 @@ const mapDispatchToProps = {
 }
 
 const mapStateToProps = state => ({
-    stats: state.global.stats
+    stats: state.global.stats,
+    user: state.global.user
 })
 export default connect(mapStateToProps, mapDispatchToProps)(EnhancedTable);
 
