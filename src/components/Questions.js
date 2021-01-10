@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import {connect} from 'react-redux'
 import {setAnswer} from '../actions/actions'
+import {shuffle} from "lodash";
 
 class Questions extends React.Component {
   constructor(props) {
@@ -37,10 +38,10 @@ class Questions extends React.Component {
   }
 
   render () {
-    const {
-        currentQuestion
-    } = this.props
-      const answers = [...currentQuestion.incorrectAnswers, currentQuestion.correctAnswer]
+      const {
+          currentQuestion
+      } = this.props
+      const answers = shuffle([...currentQuestion.incorrectAnswers, currentQuestion.correctAnswer])
     return (
       <>
         <p className='c-questions__title c-question'>
