@@ -5,6 +5,7 @@ import SidePanel from './SidePanel'
 import EndScreen from './EndScreen'
 import {connect} from 'react-redux'
 import {getQuestions, resetGame} from '../actions/actions'
+import history from "../history";
 
 class Game extends Component {
     componentDidMount() {
@@ -15,6 +16,10 @@ class Game extends Component {
         }
 
         this.props.getQuestions()
+
+        if (!this.props.user || !this.props.user.username) {
+            history.replace('/')
+        }
     }
 
     componentWillUnmount() {
@@ -56,7 +61,9 @@ Game.propTypes = {
 const mapStateToProps = state => ({
     appSettings: state.global,
     questions: state.game.questions,
-    isGameFinished: state.global.isGameFinished
+    isGameFinished: state.global.isGameFinished,
+    user: state.global.user,
+
 })
 
 export default connect(mapStateToProps, {
